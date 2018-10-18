@@ -15,7 +15,7 @@ class App extends React.Component {
 			zip: '',
 			phone_number: '',
 			credit_card_number: '',
-			cc_exp_date: '',
+			expiration_date: '',
 			cvv: '',
 			billing_zip_code: ''
 		};
@@ -24,7 +24,7 @@ class App extends React.Component {
 	// methods
 
 	progressToNextStep() {
-		if (this.state.form < 5) {
+		if (this.state.form < 4) {
 			this.setState({form: this.state.form + 1});			
 		} else {
 			this.setState({form: 0});
@@ -56,7 +56,7 @@ class App extends React.Component {
 		
 		let dataObj = {
 			'credit_card_number': this.state.credit_card_number, 
-			'cc_exp_date': this.state.cc_exp_date, 
+			'expiration_date': this.state.expiration_date, 
 			'cvv': this.state.cvv,
 			'billing_zip_code': this.state.billing_zip_code,
 			'email': this.state.email
@@ -117,8 +117,8 @@ class App extends React.Component {
 			chosenForm = (<Form2 setInputState={this.setInputState.bind(this)} createAddress={this.createAddress.bind(this)} />);
 		} else if (this.state.form === 3) {
 			chosenForm = (<Form3 setInputState={this.setInputState.bind(this)} createPaymentMethod={this.createPaymentMethod.bind(this)} />);
-		// case 4:
-		// 	chosenForm = (<ConfirmationPage />);
+		} else if (this.state.form === 4) {
+			chosenForm = (<ConfirmationPage appState={this.state} progress={this.progressToNextStep.bind(this)}/>);
 		}
 		return (
 
@@ -230,8 +230,9 @@ const Form2 = (props) => (
 const Form3 = (props) => (
 	<div>
 		<input onChange={props.setInputState} id="credit_card_number"/>
-		<input onChange={props.setInputState} id="cc_exp_date"/>
+		<input onChange={props.setInputState} id="expiration_date"/>
 		<input onChange={props.setInputState} id="cvv"/>
+		<input onChange={props.setInputState} id="billing_zip_code"/>
 		<button onClick={props.createPaymentMethod}>Next</button>
 	</div>
 );
@@ -245,6 +246,24 @@ const Form3 = (props) => (
 			// results in db query INSERT INTO
 
 // Confirmation page component
+const ConfirmationPage = (props) => (
+	<div>
+		<div>name {props.appState.name}</div>
+		<div>email {props.appState.email}</div>
+		<div>password {props.appState.password}</div>
+		<div>address_line_1 {props.appState.address_line_1}</div>
+		<div>address_line_2 {props.appState.address_line_2}</div>
+		<div>city {props.appState.city}</div>
+		<div>state {props.appState.state}</div>
+		<div>zip {props.appState.zip}</div>
+		<div>phone_number {props.appState.phone_number}</div>
+		<div>credit_card_number {props.appState.credit_card_number}</div>
+		<div>expiration_date {props.appState.expiration_date}</div>
+		<div>cvv {props.appState.cvv}</div>
+		<div>billing_zip_code {props.appState.billing_zip_code}</div>
+		<button onClick={props.progress}>Purchase</button>
+	</div>
+);
 	// data summary
 	// purchase button
 		// sends POST request

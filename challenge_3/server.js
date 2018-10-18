@@ -66,7 +66,7 @@ app.post('/addresses', (req, res) => {
 
 app.post('/payment_methods', (req, res) => {
 	statusCode = 201;
-	var queryArgs = [req.body, req.body.expiration_date, req.body.cvv, req.body.billing_zip_code, req.body.email];
+	var queryArgs = [req.body.credit_card_number, req.body.expiration_date, req.body.cvv, req.body.billing_zip_code, req.body.email];
 	console.log('PAYMENT METHOD>>>>>>>', queryArgs);
 	connection.query('INSERT INTO payment_methods (credit_card_number, expiration_date, cvv, billing_zip_code, user_id) VALUES (?, ?, ?, ?, (SELECT id FROM users WHERE email=?));', queryArgs, (error, results, fields) => {
 		if(error) {
