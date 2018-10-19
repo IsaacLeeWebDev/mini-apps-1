@@ -1,0 +1,46 @@
+.insertRedCheckerButton, .insertBlueCheckerButton {
+	width: 150px;
+	height: 75px;
+	border: 2px solid #222;
+	margin-bottom: 20px;
+	background-color: white;
+}
+
+.insertRedCheckerButton:hover {
+	background-color: red;
+}
+
+.insertBlueCheckerButton:hover {
+	background-color: blue;
+}
+
+.fullColumnButton {
+	width: 150px;
+	height: 75px;
+	background-color: #fff;
+	cursor: not-allowed;
+	border: 2px solid white;
+}
+
+.rowDiv {
+	display: flex;
+}
+
+.redCell, .blueCell, .emptyCell {
+	width: 150px;
+	height: 75px;
+	border: 2px solid yellow;
+}
+
+.redCell {
+	background-color: red;
+}
+
+.blueCell {
+	background-color: blue;
+}
+
+#resetButton {
+	margin-top: 40px;
+	font-size: 40px;
+}
